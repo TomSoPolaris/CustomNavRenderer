@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net7.0-android</TargetFramework>
+		<TargetFrameworks>net8.0-android;net8.0-ios</TargetFrameworks>
 		<OutputType>Exe</OutputType>
 		<RootNamespace>CustomNavRendererDemo</RootNamespace>
 		<UseMaui>true</UseMaui>
@@ -19,6 +19,7 @@
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
 		<ApplicationVersion>1</ApplicationVersion>
 
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">11.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
 	</PropertyGroup>
 
@@ -26,6 +27,9 @@
 	  <CreatePackage>false</CreatePackage>
 	  <CodesignProvision>Automatic</CodesignProvision>
 	  <CodesignKey>iPhone Developer</CodesignKey>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-ios|AnyCPU'">
+	  <CreatePackage>false</CreatePackage>
 	</PropertyGroup>
 	<ItemGroup>
 		<!-- App Icon -->
